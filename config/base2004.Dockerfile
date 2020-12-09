@@ -20,7 +20,9 @@ RUN apt-get install -y build-essential  \
     libffi-dev \
     python3-dev \
     python3-setuptools \
-    wget
+    wget \
+    nodejs \
+    npm
 
 RUN mkdir /tmp/Python39 \
     && cd /tmp/Python39 \
@@ -39,6 +41,7 @@ RUN apt-get install curl -y
 
 RUN pip install jupyter --upgrade
 RUN pip install jupyterlab --upgrade
+RUN jupyter labextension install @jupyterlab/toc
 
 RUN apt-get install pandoc -y
 RUN apt-get install texlive-xetex -y 
@@ -46,7 +49,7 @@ RUN apt-get install texlive-xetex -y
 RUN unlink /usr/bin/python
 RUN ln -s /usr/local/bin/python3.9 /usr/bin/python
 
-RUN apt-get install zsh bash -y
+RUN apt-get install bash -y
 RUN pip install bash_kernel
 RUN python -m bash_kernel.install
 
@@ -54,10 +57,12 @@ RUN python -m bash_kernel.install
 RUN apt install git-all -y
 
 # ZSH
+RUN apt-get install zsh
 CMD ["chsh -s", "/bin/zsh"]
 CMD ["sh -c", "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"]
 
 CMD ["sh -c", "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"]
+# install zinit plugins (fzf)
 
 # PULL dotfiles to set up zsh and its plugins
 RUN wget -q https://github.com/cdr/code-server/releases/download/v3.7.4/code-server_3.7.4_amd64.deb
