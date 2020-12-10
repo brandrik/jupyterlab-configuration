@@ -4,7 +4,7 @@ ENV LIBS_PATH=${MAIN_PATH}/libs
 ENV CONFIG_PATH=${MAIN_PATH}/config
 ENV NOTEBOOK_PATH=${MAIN_PATH}/notebooks
 
-RUN jupyter
+#RUN jupyter
 
 EXPOSE 8888
 
