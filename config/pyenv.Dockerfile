@@ -54,6 +54,8 @@ RUN git clone -b `cat /pyenv-version.txt` --single-branch --depth 1 https://gith
     && find $PYENV_ROOT/versions -type f '(' -name '*.pyo' -o -name '*.exe' ')' -exec rm -f '{}' + \
  && rm -rf /tmp/*
 
+# TODO: make this for py2 and py3 and pypy, e.g.
+# pypy3 -m pip install numpy
 # COPY requirements-setup.txt requirements-test.txt requirements-ci.txt /
 # RUN pip install -r /requirements-setup.txt \
 #     && pip install -r /requirements-test.txt \
@@ -61,3 +63,8 @@ RUN git clone -b `cat /pyenv-version.txt` --single-branch --depth 1 https://gith
 #     && find $PYENV_ROOT/versions -type d '(' -name '__pycache__' -o -name 'test' -o -name 'tests' ')' -exec rm -rf '{}' + \
 #     && find $PYENV_ROOT/versions -type f '(' -name '*.pyo' -o -name '*.exe' ')' -exec rm -f '{}' + \
 #  && rm -rf /tmp/*
+
+# TODO make this generic for all installed python versions
+RUN pyenv local pypy3.6-7.3.1 \
+    && pypy3 -m pip install ipykernel \
+    && pypy3 -m ipykernel install --user --name pypy3 --display-name "PyPy3"
