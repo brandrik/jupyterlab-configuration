@@ -5,7 +5,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get update
 RUN apt-get -y upgrade
-RUN apt-get install -y build-essential  \
+RUN apt-get install -y --fix-missing build-essential  \
      checkinstall \
      libreadline-gplv2-dev \
     libncursesw5-dev \
@@ -55,13 +55,15 @@ RUN python -m bash_kernel.install
 
 
 RUN apt install git-all -y
+RUN apt install nano -y 
+RUN apt install htop -y
 
 # ZSH
 RUN apt-get install zsh
-CMD ["chsh -s", "/bin/zsh"]
-CMD ["sh -c", "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"]
+RUN chsh -s /bin/zsh
+RUN sh -c $(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
 
-CMD ["sh -c", "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"]
+RUN sh -c $(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)
 # install zinit plugins (fzf)
 
 # PULL dotfiles to set up zsh and its plugins
@@ -75,3 +77,7 @@ RUN dpkg -i code-server_3.7.4_amd64.deb
 # VSCODE
 
 ## VSCODE SERVER and extensions from list
+
+# GIT AND SSH KEY
+# COPY github, gitlab ... keys
+# create ssh-keypair prompt

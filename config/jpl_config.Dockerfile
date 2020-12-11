@@ -1,5 +1,6 @@
 FROM pyenv
-ENV MAIN_PATH=/usr/local/bin/jpl_config
+#ENV MAIN_PATH=/usr/local/bin/jpl_config
+ENV MAIN_PATH=/root
 ENV LIBS_PATH=${MAIN_PATH}/libs
 ENV CONFIG_PATH=${MAIN_PATH}/config
 ENV NOTEBOOK_PATH=${MAIN_PATH}/notebooks

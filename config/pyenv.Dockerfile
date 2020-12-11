@@ -1,4 +1,6 @@
 FROM base2004
+RUN echo "The base path is: \n"
+RUN echo $basepath
 # RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 # RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc \
 #     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc \
@@ -45,7 +47,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zlib1g-dev \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY ./config/pyenv-version.txt ./config/python-versions.txt /
+#COPY $basepath/pyenv-version.txt ./ \
+#    $basepath/python-versions.txt /
+COPY ./config/pyenv-version.txt ./ \
+     ./config/python-versions.txt ./
 
 RUN git clone -b `cat /pyenv-version.txt` --single-branch --depth 1 https://github.com/pyenv/pyenv.git $PYENV_ROOT \
     && for version in `cat /python-versions.txt`; do pyenv install $version; done \
