@@ -1,13 +1,10 @@
-FROM ubuntu:20.04
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
-RUN apt-get update -y && apt-get upgrade -y
-# RUN apt-get install aptitude
-# RUN aptitude update
-# RUN aptitude -y upgrade
-
+RUN apt-get update
+RUN apt-get -y upgrade
 RUN apt-get install -y --fix-missing build-essential  \
      checkinstall \
      libreadline-gplv2-dev \
@@ -45,7 +42,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 
 RUN pip install --upgrade pip
 RUN pip install requests
-# RUN apt-get install curl -y
+RUN apt-get install curl -y
 
 RUN pip install jupyter --upgrade
 RUN pip install jupyterlab --upgrade

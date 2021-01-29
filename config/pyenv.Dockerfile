@@ -14,7 +14,8 @@ RUN echo $basepath
 # RUN pyenv install 2.7.12
 # RUN pyenv install pypy3.6-7.3.1 
 
-
+#CFLAGS="-I/usr/include/openssl"
+#LDFLAGS="-L/usr/lib/openssl-1.0"
 
 # set the variables as per $(pyenv init -)
 ENV LANG="C.UTF-8" \
@@ -23,16 +24,42 @@ ENV LANG="C.UTF-8" \
     PYENV_ROOT="/opt/pyenv" \
     PYENV_SHELL="bash"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install aptitude -y
+RUN aptitude update
+RUN aptitude upgrade -y
+
+#RUN apt install -y --no-install-recommends \
+# install cmake
+# wget https://github.com/Kitware/CMake/releases/download/v3.19.3/cmake-3.19.3.tar.gz
+# tar -zxvf cmake-3.19.3.tar.gz
+# cd cmake-3.19.3
+# ./bootstrap
+# make install
+# cmake --version
+# compile bzip2
+# cd bzip2
+#mkdir build && cd build
+#cmake ..
+#cmake --build . --config Release
+# ln -s /~/bzip2/build/bzip2 /usr/bin/bzip2
+
+#openssl
+#https://cloudwafer.com/blog/installing-openssl-on-ubuntu-16-04-18-04/
+#aptitude update && aptitude upgrade
+#aptitude install build-essential checkinstall zlib1g-dev -y
+#
+
+RUN apt install -y  \
         build-essential \
         ca-certificates \
-        curl \
+ #       curl \
         git \
         libbz2-dev \
         libffi-dev \
         libncurses5-dev \
         libncursesw5-dev \
         libreadline-dev \
+        libedit-dev \
         libsqlite3-dev \
         #libssl1.0-dev \
         liblzma-dev \
@@ -41,6 +68,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         make \
         netbase \
         pkg-config \
+        python-openssl \
+        #OpenSSL 1.1.1f  31 Mar 2020
         tk-dev \
         wget \
         xz-utils \
