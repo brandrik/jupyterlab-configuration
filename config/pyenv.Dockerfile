@@ -99,6 +99,6 @@ RUN git clone -b `cat /pyenv-version.txt` --single-branch --depth 1 https://gith
 #  && rm -rf /tmp/*
 
 # TODO make this generic for all installed python versions
-RUN pyenv local pypy3.6-7.3.1 \
-    && pypy3 -m pip install ipykernel \
-    && pypy3 -m ipykernel install --user --name pypy3 --display-name "PyPy3"
+# RUN pyenv local pypy3.6-7.3.1 \
+#     && pypy3 -m pip install ipykernel \
+#     && pypy3 -m ipykernel install --user --name pypy3 --display-name "PyPy3"

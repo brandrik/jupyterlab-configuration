@@ -4,6 +4,10 @@
 # Jupyter Notebook
 .ipynb_checkpoints
 
+.npm
+.local
+.jupyter
+
 # output-folders
 container/
 build/
